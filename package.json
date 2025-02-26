@@ -1,0 +1,28 @@
+{
+  "name": "meter-reading",
+  "version": "1.0.0",
+  "description": "Simulation of a utility meter reading app.",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steven2k2/meter-reading.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/steven2k2/meter-reading/issues"
+  },
+  "homepage": "https://github.com/steven2k2/meter-reading#readme",
+  "devDependencies": {
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
