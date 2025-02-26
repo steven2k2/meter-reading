@@ -9,7 +9,7 @@ function component () {
   // Lodash, now imported by this script
   element.innerHTML = _.join(['Hello', 'webpack'], ' ')
 
-  let result = MetersString.capitalize('hello, webpack!')
+  const result = MetersString.capitalize('hello, webpack!')
   console.log(result) // Output: "Hello, webpack!"
 
   return element
