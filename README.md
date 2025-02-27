@@ -23,6 +23,11 @@ npx webpack --config webpack.config.js
 ```plaintext
 /meter-reading
 │── /src
+├── templates/
+│   │   ├── index.hbs
+│   │   ├── partials/
+│   │   │   ├── header.hbs
+│   │   │   ├── footer.hbs
 │   ├── /components       # Reusable UI components
 │   ├── /services         # API services or business logic classes
 │   ├── /utils            # General utility functions/helpers
@@ -31,6 +36,18 @@ npx webpack --config webpack.config.js
 │── /dist                 # Webpack output folder
 │── webpack.config.js     # Webpack configuration
 │── package.json          # Project dependencies
+```
+
+```shell
+npm install webpack webpack-cli webpack-dev-server --save-dev
+npm install handlebars handlebars-loader html-webpack-plugin --save-dev
+npm install bootstrap
+
+
+```
+
+```shell
+npm install dotenv-webpack --save-dev
 ```
 
 ---

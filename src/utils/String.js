@@ -4,11 +4,16 @@
  * @file Provides string manipulation utilities under the `Meters.String` namespace.
  * @namespace Meters.String
  * @description
- * A collection of static string manipulation methods, including capitalization,
- * uncapitalization, and text truncation with ellipsis support.
+ * A collection of static string manipulation methods, including capitalisation,
+ * uncapitalisation, and text truncation with ellipsis support.
  */
 export const Meters = {
   String: class {
+    static escapeRe = /['\\]/g // Matches both ' and \ globally
+    static varReplace = /(^[^a-zA-Z]*|\W)/g // Ensure it removes leading non-letters and non-alphanumeric characters
+
+    // endsWith
+
     /**
      * Capitalises the first letter of a given string.
      * @param {string} str - The input string.
@@ -16,6 +21,46 @@ export const Meters = {
      */
     static capitalize (str = '') {
       return str ? str[0].toUpperCase() + str.slice(1) : ''
+    }
+
+    /**
+     * Converts a string of characters into a legal, parse-able JavaScript `var` name
+     * as long as the passed string contains at least one alphabetic character.
+     * Non-alphanumeric characters, and *leading* non-alphabetic characters will be removed.
+     * @param {String} s A string to be converted into a `var` name.
+     * @return {String} A legal JavaScript `var` name.
+     */
+    static createVarName (s) {
+      // Guard statements
+      if (typeof s !== 'string' || !s.match(/[a-zA-Z]/)) return ''
+      return s.replace(this.varReplace, '')
+    }
+
+    /**
+     * Escapes the passed string for ' and \.
+     * @param {string} string The string to escape.
+     * @return {string} The escaped string.
+     */
+    static escape (string) {
+      return string.replace(this.escapeRe, '\\$&')
+    }
+
+    static insert (s, value, index) {
+      // Guard statements
+      if (!s) return value || ''
+      if (!value) return s
+
+      const len = s.length
+
+      if (index == null) index = len
+
+      // Handle negative index (insert from the end)
+      if (index < 0) {
+        // ensure position isn't less than start
+        index = Math.max(0, len + index)
+      }
+
+      return `${s.slice(0, index)}${value}${s.slice(index)}`
     }
 
     /**
@@ -64,7 +109,6 @@ export const Meters = {
         }
       }
 
-      // Trim any trailing spaces and append the ellipsis character.
       return truncated.trim() + '…'
     }
   }
