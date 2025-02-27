@@ -49,6 +49,11 @@ npm install bootstrap
 ```shell
 npm install dotenv-webpack --save-dev
 ```
+## Mochawesome
+
+Mochawesome is a custom reporter for use with the Javascript testing framework, mocha. It runs on Node.js (>=10) and works in conjunction with mochawesome-report-generator to generate a standalone HTML/CSS report to help visualise your test runs.
+
+[![mochawesome](./docs/mochawesome.jpg)](./docs/mochawesome.jpg)
 
 ---
 
