@@ -1,2 +1,7 @@
+require('./string/addBreaks.test')
 require('./string/capitalize.test')
+require('./string/createVarName.test')
+require('./string/escape.test')
+require('./string/insert.test')
+require('./string/squash.test')
 require('./string/uncapitalize.test')

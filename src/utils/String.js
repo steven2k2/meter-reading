@@ -12,7 +12,49 @@ export const Meters = {
     static escapeRe = /['\\]/g // Matches both ' and \ globally
     static varReplace = /(^[^a-zA-Z]*|\W)/g // Ensure it removes leading non-letters and non-alphanumeric characters
 
-    // endsWith
+    /**
+     * Inserts line breaks into a string when text exceeds a specified length.
+     * Preserves **existing newlines and formatting** while ensuring words are not split.
+     * If a line is longer than `length`, it will be truncated using the `ellipsis` function.
+     * Removes any extra spaces **but respects existing indents and lists**.
+     *
+     * @param {string} text - The input string.
+     * @param {number} length - The maximum allowed length per line.
+     * @returns {string} - The formatted string with line breaks.
+     */
+    static addBreaks (text, length) {
+      if (!text) return ''
+
+      return text
+        .split(/(\r?\n)/) // Preserve existing newlines
+        .map(segment => {
+          if (segment.match(/\r?\n/)) return segment // Keep newlines
+
+          const trimmedSegment = segment.replace(/\s+/g, ' ').trim() // Normalize spaces but keep structure
+          const words = trimmedSegment.split(' ')
+          const lines = []
+          let currentLine = ''
+
+          for (const word of words) {
+            if (currentLine.length + word.length + 1 > length) {
+              if (currentLine.length === 0) {
+                // If a single word itself exceeds length, truncate the entire line
+                lines.push(this.ellipsis(word, length))
+              } else {
+                lines.push(currentLine.trim())
+                currentLine = word
+              }
+            } else {
+              currentLine += (currentLine ? ' ' : '') + word
+            }
+          }
+
+          if (currentLine) lines.push(currentLine.trim())
+
+          return lines.map(line => line.length > length ? this.ellipsis(line, length) : line).join('\n')
+        })
+        .join('')
+    }
 
     /**
      * Capitalises the first letter of a given string.
@@ -31,7 +73,6 @@ export const Meters = {
      * @return {String} A legal JavaScript `var` name.
      */
     static createVarName (s) {
-      // Guard statements
       if (typeof s !== 'string' || !s.match(/[a-zA-Z]/)) return ''
       return s.replace(this.varReplace, '')
     }
@@ -45,22 +86,22 @@ export const Meters = {
       return string.replace(this.escapeRe, '\\$&')
     }
 
-    static insert (s, value, index) {
-      // Guard statements
-      if (!s) return value || ''
-      if (!value) return s
-
-      const len = s.length
-
-      if (index == null) index = len
-
-      // Handle negative index (insert from the end)
-      if (index < 0) {
-        // ensure position isn't less than start
-        index = Math.max(0, len + index)
-      }
-
+    static insert (s = '', value = '', index = s.length) {
+      index = Math.max(0, index < 0 ? s.length + index : index) // Ensure valid index
       return `${s.slice(0, index)}${value}${s.slice(index)}`
+    }
+
+    /**
+     * Aggressively compacts text by removing all spaces first and then truncating it
+     * using the existing `ellipsis` function for consistent truncation behaviour.
+     *
+     * @param {string} text - The input string.
+     * @param {number} length - The maximum allowed length before truncation.
+     * @returns {string} - The compacted and truncated string.
+     */
+    static squash (text, length) {
+      if (!text) return ''
+      return this.ellipsis(text.replace(/\s+/g, ''), length) // Always apply `ellipsis`
     }
 
     /**
