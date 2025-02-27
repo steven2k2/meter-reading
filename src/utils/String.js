@@ -69,7 +69,7 @@ export const Meters = {
      * @returns {string} - The uncapitalised string.
      */
     static uncapitalize (str = '') {
-      return str ? str.charAt(0).toLowerCase() + str.slice(1).toLowerCase() : ''
+      return str ? str.charAt(0).toLowerCase() + str.slice(1) : ''
     }
 
     /**

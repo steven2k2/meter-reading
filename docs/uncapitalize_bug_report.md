@@ -30,9 +30,9 @@ It **uncapitalizes the entire string instead of only the first letter**.
 
 ## **Action Items**
 
-- [ ] **Update `uncapitalize` function to correctly modify only the first letter**
-- [ ] **Run Mocha tests to verify the fix**
-- [ ] **Commit and push changes**
+- [X] **Update `uncapitalize` function to correctly modify only the first letter**
+- [X] **Run Mocha tests to verify the fix**
+- [X] **Commit and push changes**
 
 ---
 
@@ -44,7 +44,7 @@ It **uncapitalizes the entire string instead of only the first letter**.
 
 ## **Ticket Metadata**
 
-- **Status:** Open
+- **Status:** Closed
 - **Priority:** High (fix is small but functionally important)
 - **Assigned To:** _Me_
 - **Created By:** _Me_
@@ -55,5 +55,5 @@ It **uncapitalizes the entire string instead of only the first letter**.
 ### **Example Git Commit for the Fix**
 
 ```bash
-git commit -m "🐞 Fix uncapitalize: Ensure only the first letter is lowercased"
+git commit -m "fix: uncapitalize: Ensure only the first letter is lowercased"
 ```

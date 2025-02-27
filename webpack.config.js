@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -34,12 +34,14 @@ module.exports = {
         version: '1.0.0'
       },
       title: 'Bootstrap Handlebars Webpack Project',
-      minify: process.env.NODE_ENV === 'production' ? {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true
-      } : false
+      minify: process.env.NODE_ENV === 'production'
+        ? {
+            collapseWhitespace: true,
+            removeComments: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true
+          }
+        : false
     })
   ],
   devServer: {
@@ -48,4 +50,4 @@ module.exports = {
     open: true
   },
   mode: 'development'
-};
+}

@@ -92,7 +92,6 @@ describe('MetersString utility', function () {
     })
 
     describe('insert()', function () {
-
       it('should insert a substring at a positive index', function () {
         assert.strictEqual(Meters.String.insert('abcdefg', 'X', 2), 'abXcdefg')
       })
@@ -129,11 +128,9 @@ describe('MetersString utility', function () {
         assert.strictEqual(Meters.String.insert('abcdefg', null, 2), 'abcdefg')
         assert.strictEqual(Meters.String.insert('abcdefg', undefined, 2), 'abcdefg')
       })
-
     })
 
     describe('createVarName()', function () {
-
       it('should remove non-alphabetic leading characters', function () {
         assert.strictEqual(Meters.String.createVarName('123abc'), 'abc')
         assert.strictEqual(Meters.String.createVarName('_$testVar'), 'testVar')
@@ -164,7 +161,6 @@ describe('MetersString utility', function () {
         assert.strictEqual(Meters.String.createVarName(null), '')
         assert.strictEqual(Meters.String.createVarName(undefined), '')
       })
-
     })
   })
 })
