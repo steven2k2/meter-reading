@@ -1,12 +1,17 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
+import AssemblyInfo from './src/js/AssemblyInfo.js'; // Import the class
 
-module.exports = {
+// Create an instance of AssemblyInfo
+const appInfo = new AssemblyInfo();
+
+console.dir(appInfo.getInfo()); // Logs metadata object
+
+export default {
   entry: './src/js/index.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(process.cwd(), './dist'),
     filename: 'index_bundle.js',
-
     clean: true
   },
   module: {
@@ -15,7 +20,7 @@ module.exports = {
         test: /\.hbs$/,
         loader: 'handlebars-loader',
         options: {
-          partialDirs: path.resolve(__dirname, 'src/templates/partials')
+          partialDirs: path.resolve(process.cwd(), 'src/templates/partials')
         }
       },
       {
@@ -25,22 +30,47 @@ module.exports = {
     ]
   },
   plugins: [
+    // Index View (Home Page)
     new HtmlWebpackPlugin({
       template: './src/templates/index.hbs',
       filename: 'index.html',
       templateParameters: {
-        appTitle: 'Meters',
-        pageTitle: 'Meters',
-        version: '1.0.0'
+        appTitle: appInfo.title,
+        pageTitle: appInfo.title,
+        version: appInfo.version,
+        copyright: appInfo.copyright,
+        company: appInfo.company
       },
       title: 'Bootstrap Handlebars Webpack Project',
       minify: process.env.NODE_ENV === 'production'
         ? {
-            collapseWhitespace: true,
-            removeComments: true,
-            removeRedundantAttributes: true,
-            useShortDoctype: true
-          }
+          collapseWhitespace: true,
+          removeComments: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true
+        }
+        : false
+    }),
+
+    // Main View (New Page)
+    new HtmlWebpackPlugin({
+      template: './src/templates/main.hbs', // New Handlebars template
+      filename: 'main.html', // Generates main.html
+      templateParameters: {
+        appTitle: appInfo.title,
+        pageTitle: "Main View",
+        version: appInfo.version,
+        copyright: appInfo.copyright,
+        company: appInfo.company
+      },
+      title: 'Main Page',
+      minify: process.env.NODE_ENV === 'production'
+        ? {
+          collapseWhitespace: true,
+          removeComments: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true
+        }
         : false
     })
   ],
@@ -50,4 +80,4 @@ module.exports = {
     open: true
   },
   mode: 'development'
-}
+};

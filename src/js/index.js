@@ -1,4 +1,5 @@
 import '../styles/main.css'
+import '../js/Main.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Page loaded!')

@@ -2,6 +2,7 @@
   "name": "meter-reading",
   "version": "1.0.0",
   "description": "Simulation of a utility meter reading app.",
+  "type": "module",
   "private": true,
   "scripts": {
     "lint": "standard --env mocha",
