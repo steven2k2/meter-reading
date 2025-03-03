@@ -168,9 +168,6 @@ const PasswordControl = () => {
           sx={{
             fontWeight: "bold",
             mt: 2
-           // bgcolor: theme.palette.text.primary,
-           // color: theme.palette.background.paper,
-           // p: 1,
           }}
         >
           {displayedDate}
