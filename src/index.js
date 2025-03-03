@@ -1,10 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material/styles"; // ✅ Fixed import
-import CssBaseline from "@mui/material/CssBaseline";
-import theme from "./theme.js"; // ✅ Ensure theme.js is correctly set up
-import App from "./App.jsx";
+import { ThemeProvider, createTheme } from "@mui/material/styles/index.js"; // ✅ Explicit .js
+import CssBaseline from "@mui/material/CssBaseline/index.js"; // ✅ Explicit .js
+import theme from "./theme.js"; // ✅ Ensure theme.js exists
+import App from "./App.jsx"; // ✅ Explicit .jsx
 
 // ✅ Mount the React app with correct providers
 const root = createRoot(document.getElementById("root"));

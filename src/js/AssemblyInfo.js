@@ -1,4 +1,4 @@
-//src/js/AssemblyInfo
+// src/js/AssemblyInfo
 
 /**
  * AssemblyInfo.js - A JavaScript class for application metadata.
