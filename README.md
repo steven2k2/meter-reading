@@ -55,6 +55,8 @@ Mochawesome is a custom reporter for use with the Javascript testing framework, 
 
 [![mochawesome](./docs/mochawesome.jpg)](./docs/mochawesome.jpg)
 
+Photo by <a href="https://unsplash.com/@magicpattern?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">MagicPattern</a> on <a href="https://unsplash.com/photos/blue-and-white-checkered-pattern-am-yg8wLLIo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+         
 ---
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
