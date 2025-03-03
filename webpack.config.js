@@ -1,14 +1,8 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import path from 'path';
-import AssemblyInfo from './src/js/AssemblyInfo.js'; // Import the class
-
-// Create an instance of AssemblyInfo
-const appInfo = new AssemblyInfo();
-
-console.dir(appInfo.getInfo()); // Logs metadata object
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import path from 'path'
 
 export default {
-  entry: './src/js/index.js',
+  entry: './src/index.js',
   output: {
     path: path.resolve(process.cwd(), './dist'),
     filename: 'index_bundle.js',
@@ -17,61 +11,32 @@ export default {
   module: {
     rules: [
       {
-        test: /\.hbs$/,
-        loader: 'handlebars-loader',
-        options: {
-          partialDirs: path.resolve(process.cwd(), 'src/templates/partials')
+        test: /\.jsx?$/, // Add JSX support
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
         }
       },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i, // ✅ Add support for images
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[name][ext]' // Saves images in dist/assets/
+        }
       }
     ]
   },
   plugins: [
-    // Index View (Home Page)
     new HtmlWebpackPlugin({
-      template: './src/templates/index.hbs',
-      filename: 'index.html',
-      templateParameters: {
-        appTitle: appInfo.title,
-        pageTitle: appInfo.title,
-        version: appInfo.version,
-        copyright: appInfo.copyright,
-        company: appInfo.company
-      },
-      title: 'Bootstrap Handlebars Webpack Project',
-      minify: process.env.NODE_ENV === 'production'
-        ? {
-          collapseWhitespace: true,
-          removeComments: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true
-        }
-        : false
-    }),
-
-    // Main View (New Page)
-    new HtmlWebpackPlugin({
-      template: './src/templates/main.hbs', // New Handlebars template
-      filename: 'main.html', // Generates main.html
-      templateParameters: {
-        appTitle: appInfo.title,
-        pageTitle: "Main View",
-        version: appInfo.version,
-        copyright: appInfo.copyright,
-        company: appInfo.company
-      },
-      title: 'Main Page',
-      minify: process.env.NODE_ENV === 'production'
-        ? {
-          collapseWhitespace: true,
-          removeComments: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true
-        }
-        : false
+      template: './public/index.html', // ✅ Use HTML instead of HBS
+      filename: 'index.html'
     })
   ],
   devServer: {
@@ -79,5 +44,8 @@ export default {
     hot: true,
     open: true
   },
+  resolve: {
+    extensions: ['.js', '.jsx'] // Allow importing JSX files
+  },
   mode: 'development'
-};
+}
