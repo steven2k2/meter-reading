@@ -2,14 +2,14 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
 import PasswordControl from "./pages/PasswordControl";
-import Dashboard from "./pages/Dashboard";
+import Settings from "./pages/Settings";
 
 const App = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<PasswordControl />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </>
   );

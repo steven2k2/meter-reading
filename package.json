@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "standard --env mocha",
     "fix": "standard --fix --env mocha",
-    "test": "mocha test/index.test.mjs --reporter mochawesome",
+    "test": "mocha test/index.test.js --reporter mochawesome",
     "macOS-test": "mocha test/index.test.mjs --reporter mochawesome && open mochawesome-report/mochawesome.html",
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",

@@ -15,12 +15,13 @@ import {
 import { Visibility, VisibilityOff, Menu as MenuIcon } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import AssemblyInfo from '../js/AssemblyInfo.js'
-import Settings from '../config/Settings.js'
+import Settings from '../utils/Settings.js'
 
 // ✅ Import background images
-import defaultBackground from '../assets/background.png'
-import waterBackground from '../assets/WaterMeter.png'
-import powerBackground from '../assets/ElectricityMeter_480x640.png'
+import defaultBackground from '../assets/magnifying-glass.png'
+import waterBackground from '../assets/water-meter.png'
+import gasBackground from '../assets/gas-meter.png'
+import powerBackground from '../assets/electricity-meter.png'
 
 const appInfo = new AssemblyInfo()
 
@@ -44,8 +45,9 @@ const PasswordControl = () => {
   /** ✅ Optimized Background Selection */
   const background = useMemo(() => {
     switch (Settings.utilityType) {
-      case 'WT': return waterBackground
-      case 'PB': return powerBackground
+      case 'WTR': return waterBackground
+      case 'GAS': return gasBackground
+      case 'ELC': return powerBackground
       default: return defaultBackground
     }
   }, [Settings.utilityType])
@@ -54,7 +56,7 @@ const PasswordControl = () => {
   useEffect(() => {
     if (password === 'm3t3r') {
       setLoading(true)
-      setTimeout(() => navigate('/dashboard'), 1000)
+      setTimeout(() => navigate('/settings'), 1000)
     }
   }, [password, navigate])
 
@@ -70,14 +72,15 @@ const PasswordControl = () => {
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        backgroundImage: `url(${background})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        fontFamily: theme.typography.fontFamily
+        backgroundImage: `url(${background})`, // ✅ Use your background variable
+        backgroundSize: '256px', // ✅ Small fixed size
+        backgroundPosition: 'center', // ✅ Centered in the viewport
+        backgroundRepeat: 'no-repeat', // ✅ Prevent tiling
+        backgroundColor: theme.palette.background.default, // ✅ Adds a fallback color
       }}
     >
       {/* ✅ Title Bar (Primary Color with White Text) */}
-      <AppBar position='static' sx={{ bgcolor: theme.palette.primary.main, color: theme.palette.common.white }}>
+      <AppBar position='static'>
         <Toolbar>
           <IconButton size='large' edge='start' color='inherit' sx={{ mr: 2 }}>
             <MenuIcon />
@@ -99,8 +102,8 @@ const PasswordControl = () => {
           boxShadow: 'none'
         }}
       >
-        <Toolbar sx={{ justifyContent: 'flex-start', gap: 1.5 }}> {/* Reduced spacing */}
-          <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
+        <Toolbar sx={{ justifyContent: 'flex-start', gap: 2 }}>
+          <Typography variant='h6'>
             Password
           </Typography>
 
@@ -140,7 +143,7 @@ const PasswordControl = () => {
       {/* ✅ Loading Indicator */}
       {loading && (
         <Box sx={{ mt: 2, ml: 2 }}>
-          <Typography variant='h6' sx={{ color: theme.palette.success.main, fontWeight: 'bold' }}>
+          <Typography variant='h6' sx={{ color: theme.palette.success.main }}>
             Logging in...
           </Typography>
           <CircularProgress color='primary' sx={{ mt: 1 }} />
@@ -152,22 +155,21 @@ const PasswordControl = () => {
         maxWidth='xs'
         sx={{ mt: 3, ml: 2, color: theme.palette.text.primary }}
       >
-        <Typography variant='h6' sx={{ fontWeight: 'bold', mb: 1 }}>
+        <Typography variant='subtitle1' sx={{ mb: 1 }}>
           Version: {appInfo.version}
         </Typography>
-        <Typography variant='body2' sx={{ fontWeight: 'bold' }}>
+        <Typography variant='subtitle1' sx={{ mb: 1 }}>
           Copyright © 2002 - 2025 DSKY Ltd.
         </Typography>
-        <Typography variant='h6' sx={{ mt: 1, fontWeight: 'bold' }}>
+        <Typography variant='subtitle1' sx={{ mb: 1 }}>
           {Settings.companyName}
         </Typography>
 
         {/* ✅ Large Bold Date Display */}
         <Typography
-          variant='h3'
+          variant="h1"
           sx={{
-            fontWeight: 'bold',
-            mt: 2
+             mt: 2
           }}
         >
           {displayedDate}

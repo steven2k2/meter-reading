@@ -55,8 +55,14 @@ Mochawesome is a custom reporter for use with the Javascript testing framework, 
 
 [![mochawesome](./docs/mochawesome.jpg)](./docs/mochawesome.jpg)
 
-Photo by <a href="https://unsplash.com/@magicpattern?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">MagicPattern</a> on <a href="https://unsplash.com/photos/blue-and-white-checkered-pattern-am-yg8wLLIo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-         
+### Icons
+<a href="https://www.flaticon.com/free-icons/water-meter" title="water meter icons">Water meter icons created by Umeicon - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/electric-meter" title="electric meter icons">Electric meter icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/smart-meter" title="smart-meter icons">Smart-meter icons created by Smashicons - Flaticon</a>
+Photo by Ash Amplifies: https://www.pexels.com/photo/yellow-and-black-striped-3662579/
+
+### Smart Meter icons
+<a href="https://www.flaticon.com/free-icons/meter" title="meter icons">Meter icons created by Smashicons - Flaticon</a>      
 ---
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
