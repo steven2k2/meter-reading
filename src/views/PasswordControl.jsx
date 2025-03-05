@@ -6,7 +6,6 @@ import {
   TextField,
   IconButton,
   InputAdornment,
-  CircularProgress,
   AppBar,
   Toolbar,
   Button,
@@ -25,13 +24,25 @@ import powerBackground from '../assets/electricity-meter.png'
 
 const appInfo = new AssemblyInfo()
 
-const PasswordControl = () => {
+const PasswordControl = ({ onLoginSuccess }) => {
   const theme = useTheme()
   const [password, setPassword] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   const [capsLockOn, setCapsLockOn] = useState(false)
   const navigate = useNavigate()
+
+  const handleLogin = () => {
+    if (password === 'm3t3r') {
+      setLoading(true)
+      setTimeout(() => {
+        // setLoading(false);
+        onLoginSuccess() // Trigger App to navigate to /books
+      }, 1000)
+    } else {
+      alert('Incorrect password. Try again.')
+    }
+  }
 
   /** ✅ Displayed Date (Memoized for Performance) */
   const displayedDate = useMemo(() => {
@@ -52,14 +63,6 @@ const PasswordControl = () => {
     }
   }, [Settings.utilityType])
 
-  /** ✅ Automatically submit password when correct */
-  useEffect(() => {
-    if (password === 'm3t3r') {
-      setLoading(true)
-      setTimeout(() => navigate('/settings'), 1000)
-    }
-  }, [password, navigate])
-
   /** ✅ Detect Caps Lock */
   const handleKeyDown = (e) => setCapsLockOn(e.getModifierState('CapsLock'))
 
@@ -76,7 +79,7 @@ const PasswordControl = () => {
         backgroundSize: '256px', // ✅ Small fixed size
         backgroundPosition: 'center', // ✅ Centered in the viewport
         backgroundRepeat: 'no-repeat', // ✅ Prevent tiling
-        backgroundColor: theme.palette.background.default, // ✅ Adds a fallback color
+        backgroundColor: theme.palette.background.default // ✅ Adds a fallback color
       }}
     >
       {/* ✅ Title Bar (Primary Color with White Text) */}
@@ -93,43 +96,29 @@ const PasswordControl = () => {
       </AppBar>
 
       {/* ✅ Password Toolbar (Left-aligned Input Field) */}
-      <AppBar
-        position='static'
-        sx={{
-          bgcolor: theme.palette.secondary.main,
-          color: theme.palette.secondary.contrastText,
-          borderBottom: `2px solid ${theme.palette.text.primary}`,
-          boxShadow: 'none'
-        }}
-      >
+      <AppBar position='static' sx={{ bgcolor: theme.palette.secondary.main, boxShadow: 'none' }}>
         <Toolbar sx={{ justifyContent: 'flex-start', gap: 2 }}>
-          <Typography variant='h6'>
-            Password
-          </Typography>
-
-          {/* ✅ Password Input Field (Left-aligned) */}
+          <Typography variant='h6'>Password</Typography>
           <TextField
             type={passwordVisible ? 'text' : 'password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={handleKeyDown}
-            disabled={loading}
             autoFocus
             variant='outlined'
-            sx={{
-              bgcolor: theme.palette.background.paper,
-              minWidth: '220px' // ✅ Slightly reduced width for better alignment
-            }}
+            sx={{ bgcolor: theme.palette.background.paper, minWidth: '220px' }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
-                  <IconButton onClick={() => setPasswordVisible(!passwordVisible)} disabled={loading}>
+                  <IconButton onClick={() => setPasswordVisible(!passwordVisible)}>
                     {passwordVisible ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               )
             }}
           />
+          <Button variant='contained' color='primary' onClick={handleLogin} disabled={loading}>
+            LOGIN
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -138,16 +127,6 @@ const PasswordControl = () => {
         <Typography variant='body2' sx={{ mt: 1, color: theme.palette.error.main, fontWeight: 'bold', ml: 2 }}>
           Caps Lock is ON
         </Typography>
-      )}
-
-      {/* ✅ Loading Indicator */}
-      {loading && (
-        <Box sx={{ mt: 2, ml: 2 }}>
-          <Typography variant='h6' sx={{ color: theme.palette.success.main }}>
-            Logging in...
-          </Typography>
-          <CircularProgress color='primary' sx={{ mt: 1 }} />
-        </Box>
       )}
 
       {/* ✅ Info Box */}
@@ -167,9 +146,9 @@ const PasswordControl = () => {
 
         {/* ✅ Large Bold Date Display */}
         <Typography
-          variant="h1"
+          variant='h1'
           sx={{
-             mt: 2
+            mt: 2
           }}
         >
           {displayedDate}

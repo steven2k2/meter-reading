@@ -8,30 +8,30 @@ class Settings {
   /**
    * Creates an instance of Settings and loads settings from localStorage.
    */
-  constructor() {
+  constructor () {
     this.defaultSettings = {
-      companyName: "Watertown Shire",
+      companyName: 'Watertown Shire',
       lowReadingCheck: true,
       showEstimate: true,
-      utilityType: "WTR"
-    };
-    this.settings = this.loadSettings();
+      utilityType: 'WTR'
+    }
+    this.settings = this.loadSettings()
   }
 
   /**
    * Loads settings from localStorage.
-   * If no settings exist, initializes with default values.
+   * If no settings exist, initialise with default values.
    */
-  loadSettings() {
-    const savedSettings = localStorage.getItem("settings");
-    return savedSettings ? JSON.parse(savedSettings) : this.defaultSettings;
+  loadSettings () {
+    const savedSettings = localStorage.getItem('settings')
+    return savedSettings ? JSON.parse(savedSettings) : this.defaultSettings
   }
 
   /**
    * Saves settings to localStorage.
    */
-  saveSettings() {
-    localStorage.setItem("settings", JSON.stringify(this.settings));
+  saveSettings () {
+    localStorage.setItem('settings', JSON.stringify(this.settings))
   }
 
   /**
@@ -40,8 +40,8 @@ class Settings {
    * @param {*} [defaultValue=''] - The default value if the key does not exist.
    * @returns {*} The value of the setting or the default value.
    */
-  getProperty(key, defaultValue = '') {
-    return this.settings[key] !== undefined ? this.settings[key] : defaultValue;
+  getProperty (key, defaultValue = '') {
+    return this.settings[key] !== undefined ? this.settings[key] : defaultValue
   }
 
   /**
@@ -49,48 +49,50 @@ class Settings {
    * @param {string} key - The key of the setting.
    * @param {*} value - The value to set.
    */
-  setProperty(key, value) {
-    this.settings[key] = value;
-    this.saveSettings();
+  setProperty (key, value) {
+    this.settings[key] = value
+    this.saveSettings()
   }
 
   /** @returns {string} */
-  get utilityType() {
-    return this.getProperty('utilityType', '');
+  get utilityType () {
+    return this.getProperty('utilityType', '')
   }
+
   /** @param {string} value */
-  set utilityType(value) {
-    this.setProperty('utilityType', value);
+  set utilityType (value) {
+    this.setProperty('utilityType', value)
   }
 
   /** @returns {string} */
-  get companyName() {
-    return this.getProperty('companyName', '');
+  get companyName () {
+    return this.getProperty('companyName', '')
   }
+
   /** @param {string} value */
-  set companyName(value) {
-    this.setProperty('companyName', value);
+  set companyName (value) {
+    this.setProperty('companyName', value)
   }
 
   /** @returns {boolean} */
-  get lowReadingCheck() {
-    return this.getProperty('lowReadingCheck', false);
+  get lowReadingCheck () {
+    return this.getProperty('lowReadingCheck', false)
   }
+
   /** @param {boolean} value */
-  set lowReadingCheck(value) {
-    this.setProperty('lowReadingCheck', value);
+  set lowReadingCheck (value) {
+    this.setProperty('lowReadingCheck', value)
   }
 
   /** @returns {boolean} */
-  get showEstimate() {
-    return this.getProperty('showEstimate', false);
+  get showEstimate () {
+    return this.getProperty('showEstimate', false)
   }
+
   /** @param {boolean} value */
-  set showEstimate(value) {
-    this.setProperty('showEstimate', value);
+  set showEstimate (value) {
+    this.setProperty('showEstimate', value)
   }
 }
 
-export default new Settings();
-
-
+export default new Settings()

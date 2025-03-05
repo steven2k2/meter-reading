@@ -20,7 +20,7 @@ const testFiles = [
   //  './string/uncapitalize.test.js',
   // './settings.test.js',
   './settings-test2.js'
-];
+]
 
 // Dynamically import each test file
-await Promise.all(testFiles.map((file) => import(file)));
+await Promise.all(testFiles.map((file) => import(file)))
