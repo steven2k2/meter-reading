@@ -1,5 +1,9 @@
-# meter-reading
+# MeterTrack
 Simulation of a utility meter reading app.
+
+
+
+[![mobile app](./docs/mobile.png)](./docs/mobile.png)
 
 ```bash
 mkdir meter-reading
